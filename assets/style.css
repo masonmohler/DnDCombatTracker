@@ -1,0 +1,11 @@
+input {
+    display: block;
+}
+
+select {
+    display: block;
+}
+
+button {
+    display: inline;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Mason Mohler" />
+    <title>D&D Combat Tracker</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>D&D Combat Tracker</h1>
+      <form id="characterForm">
+        <label for="charName">Name:</label>
+        <input type="text" id="charName" required />
+
+        <label for="initiative">Initiative:</label>
+        <input type="number" id="initiative" required />
+
+        <label for="ac">AC:</label>
+        <input type="number" id="ac" required />
+
+        <label for="hp">HP:</label>
+        <input type="number" id="hp" required />
+
+        <button type="submit">Add Character</button>
+      </form>
+
+      <div class="characters">
+        <!-- Character cards will be dynamically added here -->
+      </div>
+    </div>
+
+    <script src="assets/script.js"></script>
+  </body>
+</html>
