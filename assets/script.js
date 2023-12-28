@@ -36,6 +36,7 @@ function addCharacter(event) {
 
   saveCharacters();
   displayCharacters();
+  displaySavedStatusDescriptions();
 }
 
 function saveCharacters() {
@@ -57,8 +58,11 @@ function displayCharacters() {
       <p>HP: <span id="${character.name}-hp">${character.hp}</span></p>
       <input type="number" id="${character.name}-damage" placeholder="Enter Damage">
       <button onclick="updateHP('${character.name}')">Update HP</button>
+      <input type="number" id="${character.name}-initiative" placeholder="Enter New Initative">
+      <button onclick="updateInit('${character.name}')">Update Initiative</button>
       <select id="${character.name}-status">
         <option value="">Select Status</option>
+        <option value=" ">None</option>
         <option value="blinded">Blinded</option>
         <option value="charmed">Charmed</option>
         <option value="deafened">Deafened</option>
@@ -75,7 +79,7 @@ function displayCharacters() {
       </select>
   <button onclick="applyStatus('${character.name}')">Apply</button>
   <div class="status-description" id="${character.name}-status-desc"></div>
-  <button onclick="deleteCharacter('${character.name}')">Delete</button>
+  <button id="delete" onclick="deleteCharacter('${character.name}')">Delete Character</button>
     `;
     charactersContainer.appendChild(characterCard);
   });
@@ -85,6 +89,7 @@ function deleteCharacter(name) {
   characters = characters.filter((character) => character.name !== name);
   saveCharacters();
   displayCharacters();
+  displaySavedStatusDescriptions();
 }
 
 function applyStatus(name) {
@@ -97,6 +102,7 @@ function applyStatus(name) {
     displayCharacters();
     displayStatusDescription(name, selectedStatus); // Display status description
   }
+  displaySavedStatusDescriptions();
   saveCharacters();
 }
 
@@ -143,6 +149,25 @@ function updateHP(name) {
   characters.sort((a, b) => b.initiative - a.initiative);
   saveCharacters();
   displayCharacters();
+  displaySavedStatusDescriptions();
+}
+
+function updateInit(name) {
+  const newInit = document.getElementById(`${name}-initiative`);
+  const initiative = parseInt(newInit.value);
+  const character = characters.find((char) => char.name === name);
+
+  character.initiative = initiative;
+
+  document.getElementById(`${name}-initiative`).textContent =
+    character.initiative;
+  newInit.value = ""; // Clear the input field
+
+  // Re-sort characters after initiative update
+  characters.sort((a, b) => b.initiative - a.initiative);
+  saveCharacters();
+  displayCharacters();
+  displaySavedStatusDescriptions();
 }
 
 document
